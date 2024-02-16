@@ -2,6 +2,8 @@
 
 This project contains a wikipedia scraper that looks for countries, their leader and fetches a short bio on their personal Wikipedia page.
 
+For that we will query an API to obtain a list of countries and their past political leaders.
+
 The start url is https://country-leaders.onrender.com.
 
 The API documentation is available at https://country-leaders.onrender.com/docs
@@ -67,11 +69,4 @@ This project was created in 3 days
 This project was made as an assignment in the BeCode course: Data AI operator.
 
 
-
-# OPEN ISSUES TO TACKLE
-
-- read through all must haves/nice to haves and update code
-- check out https://betterdatascience.com/python-pipreqs/ and update the requirements.txt file likewise
-- check the cookie thing
-- find a picture
 
