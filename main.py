@@ -1,9 +1,13 @@
 from src.scraper import WikipediaScraper
 
 def main():
+    """
+    Starting from https://country-leaders.onrender.com fetches countries and leaders
+    Looks up the first paragraph of the bio for each leader on the wikipedia page
+    Exports country, leaders, bio to json and csv files
+    """
     output_path_json = './data/leaders_data.json'
     output_path_csv = './data/leaders_data.csv'
-
 
     # Instantiate the WikipediaScraper class
     scraper = WikipediaScraper()
@@ -19,11 +23,9 @@ def main():
     leaders_per_country = scraper.get_leaders(countries)
     
     # fetch the leaders_data
-
     leaders_data = scraper.get_leaders_data(leaders_per_country)  
     
     # export to json and csv
-
     scraper.to_json_file(leaders_data, output_path_json)
     scraper.to_csv_file(leaders_data, output_path_csv)
 
