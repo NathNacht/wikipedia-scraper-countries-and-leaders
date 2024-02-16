@@ -27,6 +27,11 @@ graph TD;
     H --> J["save_to_json(LEADERS_DATA)"]
 ```
 
+# Structure of the project
+
+![alt text](image.png)
+
+
 # Installation
 
 1. In a new folder clone the repo
