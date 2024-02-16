@@ -2,7 +2,7 @@ import requests
 import re
 import json
 import csv
-from requests import Session
+from requests import Session, HTTPError
 from bs4 import BeautifulSoup
 
 class WebsiteFetchError(Exception):
@@ -12,13 +12,13 @@ class WebsiteFetchError(Exception):
         self.message = message
         super().__init__(self.message)
 
-
 class WikipediaScraper():
     """
     Instantiates the WikipediaScraper class
     """
     def __init__(self):
-        self.base_url = 'https://country-leaders.onrender.com/st/'
+        #self.base_url = 'https://country-leaders.onrender.com'
+        self.base_url = 'https://www.google.com/404'
         self.country_endpoint = self.base_url + '/countries/'
         self.leaders_endpoint = self.base_url + '/leaders/'
         self.cookie_endpoint = self.base_url + '/cookie/'
@@ -35,18 +35,31 @@ class WikipediaScraper():
         :param session: requests session
         :return: url response in json
         """
-        response_json = (session.get(url)).json()
+        # response_json = (session.get(url)).json()
 
-        # if requests.get(url).status_code in ('400', '404', '500', '502', '503', '401'):
-        #     code = requests.get(url).status_code
-        #     print(str(code))
-        #     #raise WebsiteFetchError
-        if "message" in response_json and response_json['message']in ('The cookie is expired', 'The cookie is missing'):
-            self.refresh_cookie(session)
-            response_json = (session.get(url)).json()
+        # if "message" in response_json and response_json['message']in ('The cookie is expired', 'The cookie is missing'):
+        #     self.refresh_cookie(session)
+        #     response_json = (session.get(url)).json()
     
-        return response_json
-    
+        # return response_json
+
+        try:
+            response = session.get(url)
+            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            response_json = response.json()
+                        
+            if "message" in response_json and response_json['message'] in ('The cookie is expired', 'The cookie is missing'):
+                self.refresh_cookie(session)
+                response_json = session.get(url).json()
+            
+            return response_json
+        except HTTPError as e:
+            if e.response.status_code == 403:
+                # If the error code is 403 (Forbidden), do not raise an exception
+                # Instead, raise the error again to be handled outside this function
+                raise e   
+            # If there's an HTTP error, raise a WebsiteFetchError with a custom message
+            raise WebsiteFetchError(f"Failed to fetch website: {e}")
 
     def refresh_cookie(self, session: Session):    
         """ 
