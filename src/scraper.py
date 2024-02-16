@@ -5,12 +5,20 @@ import csv
 from requests import Session
 from bs4 import BeautifulSoup
 
+class WebsiteFetchError(Exception):
+    """Exception raised for errors in fetching the website"""
+
+    def __init__(self, message="Failed to fetch website, please try again later."):
+        self.message = message
+        super().__init__(self.message)
+
+
 class WikipediaScraper():
     """
     Instantiates the WikipediaScraper class
     """
     def __init__(self):
-        self.base_url = 'https://country-leaders.onrender.com'
+        self.base_url = 'https://country-leaders.onrender.com/st/'
         self.country_endpoint = self.base_url + '/countries/'
         self.leaders_endpoint = self.base_url + '/leaders/'
         self.cookie_endpoint = self.base_url + '/cookie/'
@@ -29,12 +37,16 @@ class WikipediaScraper():
         """
         response_json = (session.get(url)).json()
 
+        # if requests.get(url).status_code in ('400', '404', '500', '502', '503', '401'):
+        #     code = requests.get(url).status_code
+        #     print(str(code))
+        #     #raise WebsiteFetchError
         if "message" in response_json and response_json['message']in ('The cookie is expired', 'The cookie is missing'):
             self.refresh_cookie(session)
             response_json = (session.get(url)).json()
     
         return response_json
-
+    
 
     def refresh_cookie(self, session: Session):    
         """ 
