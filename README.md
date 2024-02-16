@@ -1,5 +1,8 @@
 # Wikipedia Scraper Countries and their leaders
 
+[![forthebadge made-with-python](https://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+
+
 This project contains a wikipedia scraper that looks for countries, their leader and fetches a short bio on their personal Wikipedia page.
 
 For that we will query an API to obtain a list of countries and their past political leaders.
@@ -29,7 +32,18 @@ graph TD;
 
 # Structure of the project
 
-![alt text](image.png)
+
+```
+├── ASSIGNMENT.md
+├── README.md
+├── data
+│   ├── leaders_data.csv
+│   └── leaders_data.json
+├── main.py
+├── requirements.txt
+└── src
+    └── scraper.py
+```
 
 
 # Installation
@@ -65,11 +79,11 @@ Find the results in the data folder: `leaders_data.json` and `leaders_data.csv`
 - End result is a .json and a .csv file that countains the countries, leaders (first_name, last_name), their wikipedia page and a short bio.
 
 
-# Timeline
+# ⏱️ Timeline
 
 This project was created in 3 days
 
-# Personal situation
+# 📌 Personal situation
 
 This project was made as an assignment in the BeCode course: Data AI operator.
 
