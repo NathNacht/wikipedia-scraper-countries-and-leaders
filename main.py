@@ -24,8 +24,8 @@ def main():
     
     # export to json and csv
 
-    scraper.to_json(leaders_data, output_path_json)
-    scraper.to_csv(leaders_data, output_path_csv)
+    scraper.to_json_file(leaders_data, output_path_json)
+    scraper.to_csv_file(leaders_data, output_path_csv)
 
     print("Your files are ready in the data folder!")
 
