@@ -55,9 +55,9 @@ Find the results in the data folder: `leaders_data.json` and `leaders_data.csv`
 
 # Usage
 
-This program starts from https://country-leaders.onrender.com/countries to fetch the countries.
-Next it fetches the leaders from each country
-End result is a .json and a .csv file that countains the countries, leaders (first_name, last_name), their wikipedia page and a short bio.
+- This program starts from https://country-leaders.onrender.com/countries to fetch the countries.
+- Next it fetches the leaders from each country
+- End result is a .json and a .csv file that countains the countries, leaders (first_name, last_name), their wikipedia page and a short bio.
 
 
 # Timeline
